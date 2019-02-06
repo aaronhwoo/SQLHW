@@ -189,8 +189,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `enroll_student`(
 )
 BEGIN
 
-UPDATE classparticipant
-SET EndDate = Effective_date
-WHERE ID_Student = StudentID_in AND Section_in =
+
+UPDATE classparticipant cp
+INNER JOIN class c on c.ID_Class = cp.ID_Class
+INNER JOIN course co on c.ID_Course = co.ID_Course
+SET cp.EndDate = EndDate_in
+WHERE cp.ID_Student = tudentID_in AND co.CourseCode = CourseCode_in AND c.Section = Section_in 
 
 END
